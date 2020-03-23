@@ -8,7 +8,7 @@ In this exercise, you can visualize earthquakes around the world. As well as tec
 
 <br>*Tectonic plates or lithospheric plates are the different fragments into which the Earth's lithosphere is divided, that is, the most superficial layer of the planet, where the crust and the upper part of the Earth's mantle are included. At its edges, seismic, volcanic and orogenic activity is concentrated.
 
-Source: [Tectonic Plates](https://concepto.de/placas-tectonicas/)
+Source in Spanish. It was translated to English: [Tectonic Plates](https://concepto.de/placas-tectonicas/)
 
 <br>
  
