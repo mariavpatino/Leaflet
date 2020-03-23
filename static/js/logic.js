@@ -26,6 +26,28 @@ function markerSize(feature) {
   return (feature.properties.mag) * 3.5;
 }
 
+// Color Legend
+function legendColor(magnitude) {
+  if (magnitude < 1) {
+      return "#8fe38f"
+  }
+  else if (magnitude < 2) {
+      return "#deff9c"
+  }
+  else if (magnitude < 3) {
+      return "#ffffc2"
+  }
+  else if (magnitude < 4) {
+      return "#ffdebd"
+  }
+  else if (magnitude < 5) {
+      return "#ff9e6e"
+  }
+  else {
+      return "#ff6262"
+  }
+}
+
 // Base layers 
 var satelliteMap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
   attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
@@ -55,6 +77,32 @@ var baseMaps = {
   "Outdoors": outdoorsMap
 };
 
+// Define a map object
+var map = L.map("map", {
+  // US coordinates
+  center: [37.09, -95.71],
+  zoom: 3,
+  layers: [satelliteMap]
+});
+
+var layers = {
+  earthquakes: new L.LayerGroup(),
+  tacPlates: new L.LayerGroup()
+};
+
+
+// Create an overlay object
+var overlayMaps = {
+  "Earthquakes": layers.earthquakes,
+  "Tactonic Plates": layers.tacPlates
+};
+
+
+// Add the layer control to the map
+L.control.layers(baseMaps, overlayMaps, {
+  collapsed: false
+}).addTo(map);
+
 // Store API endpoint as queryUrl
 var queryUrl = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
 
@@ -80,75 +128,33 @@ d3.json(queryUrl, function (data) {
       return layer.bindPopup("<h3>Place: " + feature.properties.place +
       "</h3><hr><p>Magnitude: " + feature.properties.mag + "</p><hr><p>Time: " + new Date(feature.properties.time) +"</p>");
     }
-  });
+  }).addTo(layers["earthquakes"]);
 
-
-  // Our style object
-  var mapStyle = {
-      color: "orange",
-      weight: 3
-  };
-  d3.json("PlatesData/PB2002_boundaries.json", function (data) {
-      // Creating a geoJSON layer with the retrieved data
-      L.geoJson(data, {
-          // Passing in our style object
-          style: mapStyle
-      }).addTo(map);
-  });
-
-
-
-  // Create an overlay object
-  var overlayMaps = {
-    "Earthquakes": earthquakes
-  };
-
-  // Define a map object
-  var map = L.map("map", {
-    // US coordinates
-    center: [37.09, -95.71],
-    zoom: 3,
-    layers: [satelliteMap, earthquakes]
-  });
-
-  // Add the layer control to the map
-  L.control.layers(baseMaps, overlayMaps, {
-    collapsed: false
-  }).addTo(map);
+ 
+  
 });
 
+ // Our style object
+ var mapStyle = {
+  color: "orange",
+  weight: 3
+};
+d3.json("PlatesData/PB2002_boundaries.json", function (data) {
+  // Creating a geoJSON layer with the retrieved data
+  L.geoJSON(data, {
+      // Passing in our style object
+      style: mapStyle
+  }).addTo(layers["tacPlates"]);
+});
 
-//create the legend
-function legendColor(magnitude) {
-  if (magnitude < 1) {
-      return "#8fe38f"
-  }
-  else if (magnitude < 2) {
-      return "#deff9c"
-  }
-  else if (magnitude < 3) {
-      return "#ffffc2"
-  }
-  else if (magnitude < 4) {
-      return "#ffdebd"
-  }
-  else if (magnitude < 5) {
-      return "#ff9e6e"
-  }
-  else {
-      return "#ff6262"
-  }
-}
+var legend = L.control({ position: 'bottomright' });
 
-
-// var legend = L.control({ position: 'bottomright' });
-var legend = L.control()
 legend.onAdd = function (map) {
 
     var div = L.DomUtil.create('div', 'info legend'),
         richterScale = [0,1,2,3,4,5],
         labels = [];
-    div.innerHTML += "<h1>Richter Scale</h1>"
+    div.innerHTML += "<strong><p>Richter<br> Scale</p>"
     // loop through our density intervals and generate a label with a colored square for each interval
     for (var i = 0; i < richterScale.length; i++) {
         div.innerHTML +=
@@ -159,3 +165,4 @@ legend.onAdd = function (map) {
 };
 
 legend.addTo(map);
+
