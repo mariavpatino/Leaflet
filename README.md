@@ -14,7 +14,7 @@ Source: [Tectonic Plates](https://concepción.de/placas-tectonicas/#ixzz6HWiQn3M
 
 <br>
  
-Technology Used:
+### Technology Used:
 - HTML
 - CSS
 - Javascript
