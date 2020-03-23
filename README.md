@@ -30,7 +30,7 @@ Source: [Tectonic Plates](https://concepción.de/placas-tectonicas/#ixzz6HWiQn3M
 * Open Command Prompt
 * Go to the directory where you saved the repository
 * Press Enter
---> You will need a HTTP server in Python, so:
+<br> --> You will need a HTTP server in Python, so:
 * Type: py -m http.server
 * Enter
 * Go to the browser and in the address bar type: http://localhost:8000/
