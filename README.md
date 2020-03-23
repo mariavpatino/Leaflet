@@ -2,7 +2,6 @@
 
 ## ABOUT
 
-<br>
 In this exercise, you can visualize earthquakes around the world. As well as tectonic plates*. 
 
 <br>The United States Geological Survey (USGS) provides earthquake data in several different formats, updated every 5 minutes: [USGS GeoJSON Feed](http://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php). For this exercise, the data correspond to the seismic activity registered in the last 7 days: [USGS GeoJSON 7 Days](https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson)
