@@ -1,5 +1,4 @@
 # VISUALIZING: Earthquake Data
-<br>
 
 ## ABOUT
 
