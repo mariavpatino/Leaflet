@@ -37,6 +37,7 @@ Source: [Tectonic Plates](https://concepción.de/placas-tectonicas/#ixzz6HWiQn3M
 * Enter
 * Go to the browser and in the address bar type: http://localhost:8000/
 * Enter
+* Be filled with wonder!
 <br>
 
 ## VISUALIZATIONS:
